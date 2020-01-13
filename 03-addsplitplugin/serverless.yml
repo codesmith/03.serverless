@@ -1,0 +1,126 @@
+service: service-03-addsplitplugin
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+provider:
+  name: aws
+  runtime: python3.7
+
+# you can overwrite defaults here
+  stage: dev
+  region: us-east-1
+
+# you can add statements to the Lambda function's IAM Role here
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:ListBucket"
+      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+    - Effect: "Allow"
+      Action:
+        - "s3:PutObject"
+      Resource:
+        Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - "Ref" : "ServerlessDeploymentBucket"
+            - "/*"
+
+# you can define service wide environment variables here
+  environment:
+    variable1: value1
+
+plugins:
+  - serverless-plugin-split-stacks
+
+custom:
+  splitStacks:
+    perFunction: false
+    perType: false
+    perGroupFunction: false
+
+functions:
+  hello:
+    # handler関数を指定
+    handler: handler.hello
+    timeout: 10
+    # Lambdaのイベントトリガーを設定
+    events:
+      # トリガーとしてAPIGatewayを構築
+      - http:
+          # リソースを指定
+          path: sample/test
+          # メソッドを指定
+          method: get
+      - http:
+          # リソースを指定
+          path: sample/test
+          # メソッドを指定
+          method: post
+          # 統合サービスをLambdaにする
+          # lambda ⇒「Lambda プロキシ統合の使用」のチェックボックスをOFF
+          # lambda-proxy ⇒「Lambda プロキシ統合の使用」のチェックボックスをON
+          integration: lambda
+          # カスタムリクエストの作成
+          request:
+            # カスタムテンプレートの作成
+            template:
+              application/octet-stream:
+                '{"headers":{
+                  #foreach($key in $input.params().header.keySet())
+                  "$key": "$input.params().header.get($key)"#if($foreach.hasNext),#end
+                  #end
+                  },
+                  "body": "$util.base64Encode($input.json(''$''))"
+                  }'
+          response:
+            # ヘッダーとテンプレートの指定
+            headers:
+              Content-Type: "'application/octet-stream'"
+            template: $input.path('$')
+            # カスタムレスポンスコードの設定
+            statusCodes:
+                # デフォルトのステータスコード
+                200:
+                    pattern: ''
+                # カスタムステータスコード
+                401:
+                    pattern: '.*"statusCode": 401,.*'
+                    template: $input.path("$.errorMessage")
+                    headers:
+                      Content-Type: "'application/octet-stream'"
+
+# リソースの構築
+resources:
+  Resources:
+    # DynamoDBの構築
+    DynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        # キーの型を指定
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+          -
+            AttributeName: name
+            AttributeType: S
+        # キーの種類を指定（ハッシュorレンジキー）
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+          -
+            AttributeName: name
+            KeyType: RANGE
+        # プロビジョニングするキャパシティーユニットの設定
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        # テーブル名の指定
+        TableName: TableName
