@@ -22,7 +22,7 @@ service: service-02-addapidynamo
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: python3.7
 
 # you can overwrite defaults here
   stage: dev
@@ -70,3 +70,24 @@ functions:
           path: sample/test
           # メソッドを指定
           method: get
+      - http:
+          # リソースを指定
+          path: sample/test
+          # メソッドを指定
+          method: post
+          # 統合サービスをLambdaにする
+          # lambda ⇒「Lambda プロキシ統合の使用」のチェックボックスをOFF
+          # lambda-proxy ⇒「Lambda プロキシ統合の使用」のチェックボックスをON
+          integration: lambda
+          # カスタムリクエストの作成
+          request:
+            # カスタムテンプレートの作成
+            template:
+              application/octet-stream:
+                '{"headers":{
+                  #foreach($key in $input.params().header.keySet())
+                  "$key": "$input.params().header.get($key)"#if($foreach.hasNext),#end
+                  #end
+                  },
+                  "body": "$util.base64Encode($input.json(''$''))"
+                  }'

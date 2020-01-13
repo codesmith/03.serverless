@@ -6,8 +6,8 @@
 - IAM Role
 - CloudWatch Logs
 - S3
-- API Gateway: 
-- DynamoDB: 
+- API Gateway
+- DynamoDB
 
 ### 実行の前提
 - AWS CLIの基本的なクレデンシャルの設定ができていること
