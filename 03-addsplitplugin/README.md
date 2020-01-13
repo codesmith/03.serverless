@@ -74,7 +74,7 @@ module.exports = {
 
 ### 実行履歴
 ```
-$ cd 03.serverless/02-addapidynamo/
+$ cd 03.serverless/03-addsplitplugin/
 
 <!-- リソース作成 -->
 $ sls deploy
