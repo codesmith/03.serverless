@@ -1,7 +1,7 @@
-# 01にAPI GatewayとDynamoDBを追加
+# 02にserverless-plugin-split-stacksを適用
 
 ### 参考URL
-- [Serverless FrameworkでAPIGateway・Lambda・DynamoDBを構築する](https://qiita.com/t_okkan/items/546330b5f4da720c71a7)
+- [GitHub - dougmoscrop/serverless-plugin-split-stacks](https://github.com/dougmoscrop/serverless-plugin-split-stacks)
 
 ### 試行①(splitStacksオプションについて検証)
 ```

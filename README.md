@@ -5,3 +5,6 @@
 
 ## 02-addapidynamo
 - 01にAPI GatewayとDynamoDBを追加
+
+## 03-addsplitplugin
+- 02にserverless-plugin-split-stacksを適用
