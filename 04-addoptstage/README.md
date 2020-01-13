@@ -4,12 +4,13 @@
 - [Serverless Frameworkの使い方まとめ](https://qiita.com/horike37/items/b295a91908fcfd4033a2)
 
 ### ポイント
-- `${opt:stage}`は`serverless.yml`の`resouces`(CloudFormationのテンプレートに当たる部分)の中でも使用できる。
+- `${opt:stage}`は`serverless.yml`の`functions`の中だけでなく、`resouces`(CloudFormationのテンプレートに当たる部分)の中でも使用できる。
 
 ### 試行
 ```
 provider:
   stage: ${opt:stage}
+  // 修正前は↓
   // stage: dev
 ```
 1. 上記に修正して何も無い状態から環境をデプロイしたところ、下記のようなエラーが出力されたものの、devステージとしてデプロイされた。
