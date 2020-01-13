@@ -11,7 +11,6 @@
 - AWS CLIの基本的なクレデンシャルの設定ができていること
 - Serverless Frameworkが、npmのグローバルでインストールされていること
 
-
 ### 実行履歴
 ```
 $ node -v
@@ -32,39 +31,10 @@ Components CLI: 1.4.0
 
 $ git clone https://github.com/codesmith/03.serverless.git
 
-$ cd 03.serverless/01-basic/
+$ cd 03.serverless/02-addapidynamo/
 
 <!-- リソース作成 -->
 $ sls deploy
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-........
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service service-01-basic.zip file to S3 (389 B)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-...............
-Serverless: Stack update finished...
-Service Information
-service: service-01-basic
-stage: dev
-region: us-east-1
-stack: service-01-basic-dev
-resources: 6
-api keys:
-  None
-endpoints:
-  None
-functions:
-  hello: service-01-basic-dev-hello
-layers:
-  None
-Serverless: Run the "serverless" command to setup monitoring, troubleshooting and testing.
 
 <!-- スタックごと、全てのリソースを削除 -->
 $ sls remove
