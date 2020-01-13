@@ -1,11 +1,11 @@
 # Serverless Frameworkでバージニア北部リージョンにdev環境を作成
 
-# 作られるリソース
+### 作られるリソース
 - CloudFormation: service-01-basic-dev
 - Lambda: service-02basic-dev-hello
 - IAM Role: service-01-basic-dev-us-east-1-lambdaRole
 
-# 実行履歴
+### 実行履歴
 ```
 $ cd 01-basic/
 
