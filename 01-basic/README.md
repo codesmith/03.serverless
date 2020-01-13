@@ -4,9 +4,11 @@
 - [Serverless Framework 入門(1)](https://qiita.com/Daisuke-Otaka/items/f532a058bb1108cc94f6)
 
 ### 作られるリソース
-- CloudFormation: service-01-basic-dev
-- Lambda: service-01-basic-dev-hello
-- IAM Role: service-01-basic-dev-us-east-1-lambdaRole
+- CloudFormation
+- Lambda
+- IAM Role
+- CloudWatch Logs
+- S3
 
 ### 実行の前提
 - AWS CLIの基本的なクレデンシャルの設定ができていること
