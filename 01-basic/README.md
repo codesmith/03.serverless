@@ -1,4 +1,4 @@
-# Serverless Frameworkでバージニア北部に最も基本的な構成を作成
+# Serverless Frameworkでバージニア北部に最も基本的な構成(Lambdaのみ)を作成
 
 ### 参考URL
 - [Serverless Framework 入門(1)](https://qiita.com/Daisuke-Otaka/items/f532a058bb1108cc94f6)
