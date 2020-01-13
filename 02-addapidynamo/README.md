@@ -1,12 +1,11 @@
-# Serverless Frameworkでバージニア北部に最も基本的な構成を作成
-
-### 参考URL
-- [Serverless Framework 入門(1)](https://qiita.com/Daisuke-Otaka/items/f532a058bb1108cc94f6)
+# 01にAPI GatewayとDynamoDBを追加
 
 ### 作られるリソース
 - CloudFormation: service-01-basic-dev
 - Lambda: service-01-basic-dev-hello
 - IAM Role: service-01-basic-dev-us-east-1-lambdaRole
+- API Gateway: 
+- DynamoDB: 
 
 ### 実行の前提
 - AWS CLIの基本的なクレデンシャルの設定ができていること
