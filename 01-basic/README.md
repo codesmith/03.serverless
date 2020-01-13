@@ -1,4 +1,4 @@
-# Serverless Frameworkでバージニア北部リージョンにdev環境を作成
+# Serverless Frameworkでバージニア北部に最も基本的な構成を作成
 
 ### 作られるリソース
 - CloudFormation: service-01-basic-dev
