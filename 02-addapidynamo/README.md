@@ -20,6 +20,9 @@ $ cd 03.serverless/02-addapidynamo/
 <!-- リソース作成 -->
 $ sls deploy
 
+<!-- Advanced REST ClientでBody部を添付する際にbody.txtを利用 -->
+<!-- body.txtはutf-8でエンコードされている必要がある。SJISだと失敗する。 -->
+
 <!-- スタックごと、全てのリソースを削除 -->
 $ sls remove
 ```

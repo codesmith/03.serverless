@@ -22,7 +22,7 @@ service: service-02-addapidynamo
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.6
 
 # you can overwrite defaults here
   stage: dev
@@ -91,3 +91,49 @@ functions:
                   },
                   "body": "$util.base64Encode($input.json(''$''))"
                   }'
+          response:
+            # ヘッダーとテンプレートの指定
+            headers:
+              Content-Type: "'application/octet-stream'"
+            template: $input.path('$')
+            # カスタムレスポンスコードの設定
+            statusCodes:
+                # デフォルトのステータスコード
+                200:
+                    pattern: ''
+                # カスタムステータスコード
+                401:
+                    pattern: '.*"statusCode": 401,.*'
+                    template: $input.path("$.errorMessage")
+                    headers:
+                      Content-Type: "'application/octet-stream'"
+
+# リソースの構築
+resources:
+  Resources:
+    # DynamoDBの構築
+    DynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        # キーの型を指定
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+          -
+            AttributeName: name
+            AttributeType: S
+        # キーの種類を指定（ハッシュorレンジキー）
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+          -
+            AttributeName: name
+            KeyType: RANGE
+        # プロビジョニングするキャパシティーユニットの設定
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        # テーブル名の指定
+        TableName: TableName
