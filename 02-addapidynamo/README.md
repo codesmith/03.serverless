@@ -1,5 +1,8 @@
 # 01にAPI GatewayとDynamoDBを追加
 
+### 参考URL
+- [Serverless FrameworkでAPIGateway・Lambda・DynamoDBを構築する](https://qiita.com/t_okkan/items/546330b5f4da720c71a7)
+
 ### 作られるリソース
 - CloudFormation
 - Lambda
