@@ -8,3 +8,6 @@
 
 ## 03-addsplitplugin
 - 02にserverless-plugin-split-stacksを適用
+
+## 04-addoptstage
+- 03に`${opt:stage}`を追加
